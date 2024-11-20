@@ -6,12 +6,18 @@
   "module": "esm/index.mjs",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
+      "types": {
+        "require": "./lib/index.d.ts",
+        "import": "./esm/index.d.mts"
+      },
       "import": "./esm/index.mjs",
       "require": "./lib/index.js"
     },
     "./*": {
-      "types": "./lib/*.d.ts",
+      "types": {
+        "require": "./lib/*.d.ts",
+        "import": "./esm/*.d.mts"
+      },
       "import": "./esm/*.mjs",
       "require": "./lib/*.js"
     }
@@ -33,7 +39,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:types": "tsc --noEmit",
     "build:cjs": "tsc",
-    "build:es": "tsup --format esm --out-dir esm --clean src",
+    "build:es": "tsup --format esm --out-dir esm --clean src --dts",
     "build": "yarn build:cjs && yarn build:es",
     "clean": "rimraf lib storybook-static esm",
     "storybook": "start-storybook -p 6008",
